@@ -1,0 +1,12 @@
+docker run -u zap -p 8080:8080 -it owasp/zap2docker-stable bash
+
+# Récupération de l'ID
+docker container ls
+
+# Copie des scripts dans notre container
+docker cp xxx.py <container_id>:/zap/plugin
+
+# Copie d'éventuels addons en local
+docker cp xxx.py <container_id>:/zap/scripts
+
+./zap-x.sh main.py -host 0.0.0.0 -port 8080 -config api.disablekey=true -config api.addrs.addr.name=.\* -config api.addrs.addr.regex=true -addoninstall jython -addonupdate
